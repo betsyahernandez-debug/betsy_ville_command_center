@@ -27,17 +27,17 @@ export default function Pipeline() {
       .then(r => r.json())
       .then(json => {
         if (json.error) { setError(json.error); return }
-        const raw: string[][] = json.data['Pipeline!A:Z'] || []
+        const raw: string[][] = json.data["'📝 Content Log'!A:Z"] || []
         if (raw.length < 2) return
         const headers = raw[0].map((h: string) => h.toLowerCase().trim())
         const parsed: ContentItem[] = raw.slice(1).map((row: string[]) => ({
           date:   row[headers.indexOf('date')] || '',
-          title:  row[headers.indexOf('title')] || row[headers.indexOf('content')] || '',
-          pillar: row[headers.indexOf('pillar')] || '',
-          format: row[headers.indexOf('format')] || row[headers.indexOf('type')] || '',
-          status: row[headers.indexOf('status')] || 'Draft',
-          collab: row[headers.indexOf('collab')] || row[headers.indexOf('brand')] || '',
-          notes:  row[headers.indexOf('notes')] || '',
+          title:  row[headers.indexOf('caption summary')] || row[headers.indexOf('title')] || '',
+          pillar: row[headers.indexOf('content pillar')] || row[headers.indexOf('pillar')] || '',
+          format: row[headers.indexOf('type')] || row[headers.indexOf('format')] || '',
+          status: 'Posted',
+          collab: row[headers.indexOf('gifted brand')] || row[headers.indexOf('collab')] || '',
+          notes:  row[headers.indexOf('key notes')] || row[headers.indexOf('notes')] || '',
         })).filter(i => i.title)
         setItems(parsed)
       })

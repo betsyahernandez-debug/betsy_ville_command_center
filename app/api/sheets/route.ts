@@ -23,9 +23,9 @@ export async function GET(request: Request) {
 
     // Fetch multiple ranges in one call based on tab
     const rangeMap: Record<string, string[]> = {
-      monthly_stats: ['Monthly Stats!A:Z'],
-      pillars:       ['Pillars!A:Z'],
-      pipeline:      ['Pipeline!A:Z'],
+      monthly_stats: ["'📊 Monthly Metrics'!A:Z"],
+      pillars:       ["'📊 Monthly Metrics'!A:Z"],
+      pipeline:      ["'📝 Content Log'!A:Z"],
     }
 
     const ranges = rangeMap[tab] || rangeMap['monthly_stats']
