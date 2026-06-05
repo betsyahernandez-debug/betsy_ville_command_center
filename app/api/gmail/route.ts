@@ -1,20 +1,23 @@
 import { NextResponse } from 'next/server'
 import { google } from 'googleapis'
 
-const BRAND_SENDERS = [
-  'functionhealth.com',
-  '24hourfitness.com',
-  'lemme.com',
-  'tatcha.com',
-  'yitty.com',
-  'sephora.com',
-  'oliveandjune.com',
-  'kirkkara.com',
-  'quince.com',
-  // TSM clients — name-based matching
-  'heather mcgarry',
-  'jasmine valdez',
-  'kajal vitha',
+// Subject keywords that signal actionable collab emails
+const COLLAB_SUBJECTS = [
+  'collaboration',
+  'collab',
+  'partnership',
+  'contract',
+  'gifting',
+  'campaign',
+  'brand deal',
+  'paid partnership',
+  'sponsored',
+  'ambassador',
+  'new collaboration',
+  'contract proposed',
+  'partnership opportunity',
+  'creator opportunity',
+  'influencer',
 ]
 
 function getAuth() {
@@ -33,10 +36,9 @@ function getAuth() {
 }
 
 function buildQuery() {
-  const domainQueries = BRAND_SENDERS.filter(s => s.includes('.')).map(d => `from:*@${d}`)
-  const nameQueries   = BRAND_SENDERS.filter(s => !s.includes('.')).map(n => `from:"${n}"`)
-  const all = [...domainQueries, ...nameQueries]
-  return `(${all.join(' OR ')}) newer_than:90d`
+  const subjectQueries = COLLAB_SUBJECTS.map(s => `subject:"${s}"`)
+  // Primary inbox only (excludes Promotions, Social, Updates tabs)
+  return `(${subjectQueries.join(' OR ')}) in:inbox category:primary newer_than:90d`
 }
 
 export async function GET() {
