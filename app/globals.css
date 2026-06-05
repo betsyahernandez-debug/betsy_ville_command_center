@@ -1,26 +1,75 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --parchment: #F5F0E8;
+  --parchment-dark: #EDE5D8;
+  --brown-deep: #4A3728;
+  --brown-mid: #6B4F3A;
+  --blush: #E8C4B0;
+  --blush-light: #F4DDD1;
+  --gold: #C9A96E;
+  --gold-light: #E8D5A3;
+  --sage: #8FA68E;
+  --cream-border: #DDD5C5;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--parchment);
+  color: var(--brown-deep);
+  font-family: 'Jost', sans-serif;
+  min-height: 100vh;
 }
+
+h1, h2, h3, .serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--cream-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(74,55,40,0.06);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'Jost', sans-serif;
+}
+
+.tag-live     { background: #D1FAE5; color: #065F46; }
+.tag-growing  { background: #FEF3C7; color: #92400E; }
+.tag-planned  { background: #E0E7FF; color: #3730A3; }
+.tag-posted   { background: #D1FAE5; color: #065F46; }
+.tag-filming  { background: #FEF9C3; color: #854D0E; }
+.tag-editing  { background: #DBEAFE; color: #1E40AF; }
+.tag-draft    { background: #F3F4F6; color: #374151; }
+.tag-collab   { background: #F5D0FE; color: #6B21A8; }
+.tag-paused   { background: #F3F4F6; color: #6B7280; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #EDE5D8 25%, #F5F0E8 50%, #EDE5D8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
